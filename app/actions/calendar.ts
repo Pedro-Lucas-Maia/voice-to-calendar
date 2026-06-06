@@ -83,11 +83,11 @@ export async function saveToGoogle(data: CalendarData) {
 
       return { success: true, message: 'Tarefa salva com sucesso no Google Tasks!' };
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Erro na API do Google:', error);
     return { 
       success: false, 
-      message: error.message || 'Erro de comunicação com o Google. Verifique seus tokens.' 
+      message: error instanceof Error ? error.message : 'Erro de comunicação com o Google. Verifique seus tokens.' 
     };
   }
 }

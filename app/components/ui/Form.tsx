@@ -1,5 +1,5 @@
-import { cn } from "@/lib/utils";
-import React, { forwardRef } from "react";
+import { cn } from '@/lib/utils';
+import React, { forwardRef } from 'react';
 
 // Form
 interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
@@ -8,7 +8,7 @@ interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
 
 export function Form({ className, children, ...props }: FormProps) {
   return (
-    <form className={cn("space-y-6", className)} {...props}>
+    <form className={cn('space-y-4', className)} {...props}>
       {children}
     </form>
   );
@@ -21,7 +21,7 @@ interface FormGroupProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export function FormGroup({ className, children, ...props }: FormGroupProps) {
   return (
-    <div className={cn("space-y-2", className)} {...props}>
+    <div className={cn('space-y-1.5', className)} {...props}>
       {children}
     </div>
   );
@@ -35,10 +35,7 @@ interface FormLabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
 export function FormLabel({ className, children, ...props }: FormLabelProps) {
   return (
     <label
-      className={cn(
-        "text-sm font-medium text-gray-700 dark:text-gray-300",
-        className,
-      )}
+      className={cn('text-sm font-medium text-zinc-300 block', className)}
       {...props}
     >
       {children}
@@ -55,7 +52,7 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
       <input
         ref={ref}
         className={cn(
-          "flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:border-transparent disabled:cursor-not-allowed disabled:opacity-50 dark:border-dark-border-medium dark:bg-[#222222] dark:text-gray-100 dark:placeholder:text-gray-500",
+          'flex h-11 w-full rounded-xl border border-zinc-800 bg-zinc-950 px-3 py-2 text-sm text-zinc-100 placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-zinc-600 focus:border-transparent disabled:cursor-not-allowed disabled:opacity-50 transition-all',
           className,
         )}
         {...props}
@@ -63,7 +60,7 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
     );
   },
 );
-FormInput.displayName = "FormInput";
+FormInput.displayName = 'FormInput';
 
 // Form Error
 interface FormErrorProps extends React.HTMLAttributes<HTMLParagraphElement> {
@@ -72,7 +69,7 @@ interface FormErrorProps extends React.HTMLAttributes<HTMLParagraphElement> {
 
 export function FormError({ className, children, ...props }: FormErrorProps) {
   return (
-    <p className={cn("text-xs font-medium text-red-500", className)} {...props}>
+    <p className={cn('text-xs font-medium text-red-400', className)} {...props}>
       {children}
     </p>
   );
