@@ -13,7 +13,7 @@ type CalendarData = {
 
 const oauth2client = new google.auth.OAuth2(
   process.env.GOOGLE_CLIENT_ID,
-  process.env.GOOGLE_CLIENT_SECRET, // corrigido de CLIENTE_SECRET para CLIENT_SECRET
+  process.env.GOOGLE_CLIENT_SECRET,
 );
 
 oauth2client.setCredentials({
@@ -40,20 +40,20 @@ export async function saveToGoogle(data: CalendarData) {
         // Evento com horário específico
         const dateStr = data.data || new Date().toISOString().split('T')[0];
         const timeStr = data.hora || '12:00';
-        
+
         // Define o datetime considerando o fuso de Brasília (-03:00)
         const startDateTime = new Date(`${dateStr}T${timeStr}:00-03:00`);
-        
+
         // Define o término para 1 hora depois por padrão
         const endDateTime = new Date(startDateTime.getTime() + 60 * 60 * 1000);
 
-        eventData.start = { 
-          dateTime: startDateTime.toISOString(), 
-          timeZone: 'America/Sao_Paulo' 
+        eventData.start = {
+          dateTime: startDateTime.toISOString(),
+          timeZone: 'America/Sao_Paulo',
         };
-        eventData.end = { 
-          dateTime: endDateTime.toISOString(), 
-          timeZone: 'America/Sao_Paulo' 
+        eventData.end = {
+          dateTime: endDateTime.toISOString(),
+          timeZone: 'America/Sao_Paulo',
         };
       }
 
@@ -63,7 +63,6 @@ export async function saveToGoogle(data: CalendarData) {
       });
 
       return { success: true, message: 'Evento salvo com sucesso na Agenda!' };
-
     } else {
       // É uma Tarefa
       const taskData: tasks_v1.Schema$Task = {
@@ -81,13 +80,19 @@ export async function saveToGoogle(data: CalendarData) {
         requestBody: taskData,
       });
 
-      return { success: true, message: 'Tarefa salva com sucesso no Google Tasks!' };
+      return {
+        success: true,
+        message: 'Tarefa salva com sucesso no Google Tasks!',
+      };
     }
   } catch (error: unknown) {
     console.error('Erro na API do Google:', error);
-    return { 
-      success: false, 
-      message: error instanceof Error ? error.message : 'Erro de comunicação com o Google. Verifique seus tokens.' 
+    return {
+      success: false,
+      message:
+        error instanceof Error
+          ? error.message
+          : 'Erro de comunicação com o Google. Verifique seus tokens.',
     };
   }
 }
